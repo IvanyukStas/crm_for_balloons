@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/crm_for_balloons.iml" filepath="$PROJECT_DIR$/.idea/crm_for_balloons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../different_lessons/.idea/different_lessons.iml" filepath="$PROJECT_DIR$/../different_lessons/.idea/different_lessons.iml" />
+    </modules>
+  </component>
+</project>
