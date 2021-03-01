@@ -1,33 +1,35 @@
 {% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
+{% block app_content %}
 <h1>Добавить нового клиента:</h1>
-    {% with messages = get_flashed_messages() %}
-    {%  if messages %}
-    <ul>
-        {% for message in messages %}
-        <li><span style="color: red">{{ message }}</span></li>
-        {% endfor    %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.client_name.label }}<br>
-            {{ form.client_name(size=32) }}<br>
-            {% for error in form.client_name.errors %}
-            <span style="color: red" >[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.client_phone.label }}<br>
-            {{ form.client_phone(size=10) }}
-        </p>
-        <p>
-            {{ form.client_birthday.label }}<br>
-            {{ form.client_birthday() }}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+    <h1>Клиенты:</h1>
+        {% for client in clients %}
+        <p>Клиент: {{ client.client_name }},
+            Номер телефона:
+                <a href="{{ url_for('user',client_phone=client.client_phone ) }}">{{ client.client_phone }}</a>
+            День Рождения: {{ client.client_birthday.date() }}</p>
+        {% endfor %}
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-md-4">
+                {{ wtf.quick_form(form_search) }}
+            </div>
+        </div>
+     {% if not search == None %}
+    <h1>ПОИСК:</h1>
+        <p>Клиент: {{ search.client_name }},
+            Номер телефона:
+                <a href="{{ url_for('user',client_phone=search.client_phone ) }}">{{ search.client_phone }}</a
+        {% endif %}
+    </div>
+    <div>
+
+    </div>
 {% endblock %}

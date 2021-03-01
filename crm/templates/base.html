@@ -1,13 +1,34 @@
+{% extends 'bootstrap/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>Title</title>
+    {% block navbar %}
     <a href="{{ url_for('index') }}">Главная</a>
+        {% if current_user.is_anonymous %}
+        <a href="{{ url_for('login') }}">Логин</a>
+        <a href="{{ url_for('registration') }}">Регистрация</a>
+        {% endif %}
 <hr>
+    {% endblock %}
 </head>
 <body>
 {% block content %}
+    {% with messages = get_flashed_messages() %}
+    {%  if messages %}
+    <ul>
+        {% for message in messages %}
+        <li><span style="color: red">{{ message }}</span></li>
+        {% endfor    %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <div style="float: left">
+    {% block app_content %}
+    {% endblock %}
 {% endblock %}
+
 </body>
 </html>

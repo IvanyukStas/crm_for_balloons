@@ -1,1 +1,8 @@
-from crm import app, forms
+from crm import app, db
+from crm.models import User
+
+
+@app.shell_context_processor
+def make_shell_context():
+    return {'db': db, 'User': User}
+
