@@ -18,6 +18,11 @@ class ClientForm(FlaskForm):
         if client is not None:
             raise ValidationError("Такой телефон уже используется!!!")
 
+class ClientFamilyForm(FlaskForm):
+    client_phone = IntegerField('Номер клиента', validators=[DataRequired()])
+    client_family_name = StringField('Имя члена семью клиента')
+    client_family_birthday = StringField('День рождения члена семьи клиента')
+    submit = SubmitField('Добавить')
 
 class ClientSearchForm(FlaskForm):
     """

@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     created_on = db.Column(db.DateTime, default=datetime.utcnow)
-
+    clients = db.relationship('Client', backref='own_client', lazy='dynamic')
 
     def __repr__(self):
         return f"<User: {self.user}>"
@@ -43,7 +43,9 @@ class Client(db.Model):
     client_phone = db.Column(db.Integer, index=True, unique=True)
     client_birthday = db.Column(db.DateTime, index=True)
     client_registration = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     client_family = db.relationship('ClientFamily', backref='client', lazy='dynamic')
+
 
     def __repr__(self):
         return f'<Клиент: {self.client_name}>'
@@ -55,7 +57,6 @@ class ClientFamily(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     client_family_name = db.Column(db.String, index=True)
-    client_family_phone = db.Column(db.Integer, index=True, unique=True)
     client_family_birthday = db.Column(db.String, index=True)
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
 

@@ -6,3 +6,4 @@ from crm.models import User
 def make_shell_context():
     return {'db': db, 'User': User}
 
+app.debug = True
