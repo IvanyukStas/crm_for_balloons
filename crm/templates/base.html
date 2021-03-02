@@ -1,34 +1,59 @@
 {% extends 'bootstrap/base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
 
-    <meta charset="UTF-8">
-    <title>Title</title>
+
     {% block navbar %}
-    <a href="{{ url_for('index') }}">Главная</a>
-        {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login') }}">Логин</a>
-        <a href="{{ url_for('registration') }}">Регистрация</a>
-        {% endif %}
-<hr>
+        <nav class="nav">
+            <a class="nav-link" href="{{ url_for('index') }}">Главная</a>
+
+            <a class="nav-link" href="{{ url_for('login') }}">Логин</a>
+            <a class="nav-link" href="{{ url_for('registration') }}">Регистрация</a>
+
+        </nav>
+    <hr>
+        <!-- Навигационная панель в виде кнопок -->
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ url_for('index') }}">Главная</a> <!-- активная ссылка -->
+    </li>
+    {% if current_user.is_anonymous %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('login') }}">Логин</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('registration') }}">Регистрация</a>
+    </li>
+    {% endif %}
+    {% if current_user.is_is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Выйти</a>
+        </li>
+    {% endif %}
+    <li class="nav-item">
+        <a class="nav-link disabled" href="{{ url_for('registration') }}" tabindex="-1"
+           aria-disabled="true">Регистрация</a> <!-- запрещенная ссылка -->
+    </li>
+</ul>
     {% endblock %}
-</head>
-<body>
-{% block content %}
-    {% with messages = get_flashed_messages() %}
-    {%  if messages %}
-    <ul>
+
+
+{% block body_attribs %} class="bg-light"{% endblock body_attribs %}
+        {% block content %}
+        {% with messages = get_flashed_messages() %}
+        {%  if messages %}
+         <ul>
         {% for message in messages %}
         <li><span style="color: red">{{ message }}</span></li>
         {% endfor    %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <div style="float: left">
-    {% block app_content %}
-    {% endblock %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+    <div class="container">
+        <div>
+            {% block app_content %}
+            {% endblock %}
+        </div>
+    </div>
 {% endblock %}
 
-</body>
-</html>
+

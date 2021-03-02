@@ -2,14 +2,27 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>{{ client.client_name }}</h1>
+    <div class="col-md-3">
+    <p class="h1">{{ client.client_name }}</p>
     <div>
-      <p>Номер телефона:
+      <p class="h3">Номер телефона:
           <a href="{{ url_for('user',client_phone=client.client_phone ) }}">{{ client.client_phone }}</a>
       </p>
       <p>День Рождения: {{ client.client_birthday.date() }}</p>
     </div>
-
+    <p class="h1">Родственники:</p>
+     <div class="h4">
+     {% for family in client_family %}
+      <p>Имя: {{ family.client_family_name }}</p>
+      <p>
+          День Рождения: {{ family.client_family_birthday }}
+          <a href="{{ url_for('delete',family_id=family.id, client_phone=client.client_phone) }}" ><button style="color: red" type="button" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+      </button></a>
+      </p>
+     {% endfor %}
+    </div>
+    </div>
 <hr>
-        {% include '_client_family_add.html' %}
+    {% include '_client_family_add.html' %}
 {% endblock %}

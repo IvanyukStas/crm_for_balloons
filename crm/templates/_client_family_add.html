@@ -1,6 +1,6 @@
 
-    <<div class="row">
-        <div class="col-md-offset-3">
-            {{ wtf.quick_form(client_family_add_form, action=url_for("client_family_add")) }}
+    <div class="row">
+        <div class="col-md-3">
+            {{ wtf.quick_form(client_family_add_form, action=url_for("client_family_add", client_phone=client.client_phone )) }}
         </div>
     </div>
