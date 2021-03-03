@@ -2,7 +2,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <div class="col-md-3">
+    <div class="col-md-4">
     <p class="h1">{{ client.client_name }}</p>
     <div>
       <p class="h3">Номер телефона:
@@ -16,13 +16,29 @@
       <p>Имя: {{ family.client_family_name }}</p>
       <p>
           День Рождения: {{ family.client_family_birthday }}
-          <a href="{{ url_for('delete',family_id=family.id, client_phone=client.client_phone) }}" ><button style="color: red" type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-      </button></a>
+          <ul class="list-inline m-0">
+                <li class="list-inline-item">
+                      <a href="{{ url_for('edit',family_id=family.id, client_phone=client.client_phone) }}" >
+                          <button style="color: blue" type="button" class="close" aria-label="Close">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                          </button>
+                      </a>
+                </li>
+                <li>
+                      <a href="{{ url_for('delete',family_id=family.id, client_phone=client.client_phone) }}">
+
+                          <button style="color: red" type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                      </a>
+                </li>
+          </ul>
       </p>
      {% endfor %}
     </div>
     </div>
 <hr>
     {% include '_client_family_add.html' %}
-{% endblock %}
+
+ {% endblock %}
+

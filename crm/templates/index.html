@@ -21,7 +21,7 @@
     <div>
         <div class="row">
             <div class="col-md-4">
-                {{ wtf.quick_form(form_search, action=url_for('search')) }}
+                {{ wtf.quick_form(form_search,form_type="inline", action=url_for('search')) }}
             </div>
         </div>
      {% if not search == None %}

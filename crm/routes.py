@@ -37,7 +37,6 @@ def user(client_phone):
     if not client_phone_in_url ==None:
         client_phone = client_phone_in_url
     client = Client.query.filter_by(client_phone=client_phone).first()
-    phone = request.args.get('client_phone')
     client_family = ClientFamily.query.filter_by(client_id=client.id)
     return render_template('user.html', title=client.client_name, client=client,
                            client_family_add_form=client_family_add_form, client_family=client_family)
@@ -106,6 +105,7 @@ def client_family_add():
 
 
 @app.route('/delete', methods=['GET', 'POST'])
+@login_required
 def delete():
     client_phone = request.args.get('client_phone')
     family_id = request.args.get('family_id')
@@ -114,3 +114,24 @@ def delete():
     db.session.delete(family_delete)
     db.session.commit()
     return redirect(url_for('user', client_phone=client_phone))
+
+
+@app.route('/edit', methods=['GET', 'POST'])
+def edit():
+    client_phone = request.args.get('client_phone')
+    family_id = request.args.get('family_id')
+    edit_form = ClientFamilyForm()
+    print(family_id,'sfsdfdsfdsfdsfs')
+    family_client = ClientFamily.query.filter_by(id=int(family_id)).first()
+    client = Client.query.filter_by(client_phone=client_phone).first()
+    client_family = ClientFamily.query.filter_by(client_id=client.id)
+    if edit_form.validate_on_submit():
+        family_client.client_family_name = edit_form.client_family_name.data
+        family_client.client_family_birthday = edit_form.client_family_birthday.data
+        db.session.commit()
+        return redirect(url_for('user', client_phone=client_phone))
+    elif request.method == 'GET':
+        edit_form = ClientFamilyForm(client_family_name=family_client.client_family_name,
+                                     client_family_birthday = family_client.client_family_birthday)
+    return render_template('user.html', client=client, client_family=client_family, edit_form=edit_form,
+                           family_id=family_id)
