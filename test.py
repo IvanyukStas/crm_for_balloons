@@ -1,4 +1,8 @@
 from datetime import datetime
+print(datetime.today().date())
+print(datetime.today().date())
+print(datetime.today().date())
+print(datetime.today().date())
 
 
 a = '20.10.2020'

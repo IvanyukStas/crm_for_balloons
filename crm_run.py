@@ -1,5 +1,8 @@
-from crm import app, db
+from crm import create_app, db
 from crm.models import User
+
+app = create_app()
+
 
 
 @app.shell_context_processor

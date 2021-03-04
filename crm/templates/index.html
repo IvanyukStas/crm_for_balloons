@@ -7,21 +7,21 @@
 <p class="h1">Добавить нового клиента:</p>
     <div class="row">
         <div class="col-md-4">
-            {{ wtf.quick_form(form, action=url_for('index')) }}
+            {{ wtf.quick_form(form, action=url_for('main.index')) }}
         </div>
     </div>
     <p class="h1">Клиенты:</p>
         {% for client in clients %}
         <p class="h4">Клиент: {{ client.client_name }},
             Номер телефона:
-                <a href="{{ url_for('user',client_phone=client.client_phone ) }}">{{ client.client_phone }}</a>
+                <a href="{{ url_for('main.user',client_phone=client.client_phone ) }}">{{ client.client_phone }}</a>
             День Рождения: {{ client.client_birthday.date() }}</p>
         {% endfor %}
     </div>
     <div>
         <div class="row">
             <div class="col-md-4">
-                {{ wtf.quick_form(form_search,form_type="inline", action=url_for('search')) }}
+                {{ wtf.quick_form(form_search,form_type="inline", action=url_for('main.search')) }}
             </div>
         </div>
      {% if not search == None %}
@@ -29,7 +29,7 @@
          <p class="h2">Клиент:</p>
          <p> {{ search.client_name }},
             Номер телефона:
-                <a href="{{ url_for('user',client_phone=search.client_phone ) }}">{{ search.client_phone }}</a>
+                <a href="{{ url_for('main.user',client_phone=search.client_phone ) }}">{{ search.client_phone }}</a>
         </p>
         {% endif %}
     </div>

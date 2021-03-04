@@ -57,7 +57,7 @@ class ClientFamily(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     client_family_name = db.Column(db.String, index=True)
-    client_family_birthday = db.Column(db.String, index=True)
+    client_family_birthday = db.Column(db.DateTime, index=True)
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
 
 

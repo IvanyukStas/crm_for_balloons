@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, DateTimeField, BooleanField, SubmitField, PasswordField
+from wtforms import StringField, IntegerField, BooleanField, SubmitField, PasswordField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
-from crm.models import Client, ClientFamily, User
+from crm.models import Client, User
+from datetime import datetime
 
 
 class ClientForm(FlaskForm):
@@ -17,6 +18,12 @@ class ClientForm(FlaskForm):
         client = Client.query.filter_by(client_phone=client_phone.data).first()
         if client is not None:
             raise ValidationError("Такой телефон уже используется!!!")
+
+
+    def validate_client_birthday(self, client_birthday):
+        date1 = datetime.strptime(client_birthday.data, "%d.%m.%Y")
+        if not type(date1) is datetime:
+            raise ValidationError('Неверный формат даты и времени!\nВведите число месяц год')
 
 class ClientFamilyForm(FlaskForm):
     #client_phone = IntegerField('Номер клиента', validators=[DataRequired()])

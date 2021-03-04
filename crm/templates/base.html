@@ -2,37 +2,30 @@
 
 
     {% block navbar %}
-        <nav class="nav">
-            <a class="nav-link" href="{{ url_for('index') }}">Главная</a>
-
-            <a class="nav-link" href="{{ url_for('login') }}">Логин</a>
-            <a class="nav-link" href="{{ url_for('registration') }}">Регистрация</a>
-
-        </nav>
-    <hr>
         <!-- Навигационная панель в виде кнопок -->
 <ul class="nav nav-pills">
     <li class="nav-item">
-        <a class="nav-link active" href="{{ url_for('index') }}">Главная</a> <!-- активная ссылка -->
+        <a class="nav-link active" href="{{ url_for('main.index') }}">Главная</a> <!-- активная ссылка -->
     </li>
     {% if current_user.is_anonymous %}
     <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('login') }}">Логин</a>
+        <a class="nav-link" href="{{ url_for('auth.login') }}">Логин</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('registration') }}">Регистрация</a>
+        <a class="nav-link" href="{{ url_for('auth.registration') }}">Регистрация</a>
     </li>
     {% endif %}
     {% if current_user.is_authenticated %}
         <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logout') }}">Выйти</a>
+            <a class="nav-link" href="{{ url_for('auth.logout') }}">Выйти</a>
         </li>
     {% endif %}
     <li class="nav-item">
-        <a class="nav-link disabled" href="{{ url_for('registration') }}" tabindex="-1"
+        <a class="nav-link disabled" href="{{ url_for('auth.registration') }}" tabindex="-1"
            aria-disabled="true">Регистрация</a> <!-- запрещенная ссылка -->
     </li>
 </ul>
+        <hr>
     {% endblock %}
 
 

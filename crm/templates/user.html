@@ -6,7 +6,7 @@
     <p class="h1">{{ client.client_name }}</p>
     <div>
       <p class="h3">Номер телефона:
-          <a href="{{ url_for('user',client_phone=client.client_phone ) }}">{{ client.client_phone }}</a>
+          <a href="{{ url_for('main.user',client_phone=client.client_phone ) }}">{{ client.client_phone }}</a>
       </p>
       <p>День Рождения: {{ client.client_birthday.date() }}</p>
     </div>
@@ -18,14 +18,14 @@
           День Рождения: {{ family.client_family_birthday }}
           <ul class="list-inline m-0">
                 <li class="list-inline-item">
-                      <a href="{{ url_for('edit',family_id=family.id, client_phone=client.client_phone) }}" >
+                      <a href="{{ url_for('main.edit',family_id=family.id, client_phone=client.client_phone) }}" >
                           <button style="color: blue" type="button" class="close" aria-label="Close">
                             <i class="glyphicon glyphicon-pencil"></i>
                           </button>
                       </a>
                 </li>
                 <li>
-                      <a href="{{ url_for('delete',family_id=family.id, client_phone=client.client_phone) }}">
+                      <a href="{{ url_for('main.delete',family_id=family.id, client_phone=client.client_phone) }}">
 
                           <button style="color: red" type="button" class="close" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
